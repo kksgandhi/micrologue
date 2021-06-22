@@ -31,6 +31,7 @@ Clone the repository and use the typescript compiler to compile passages.ts and 
 TODO
 ----
 
- - Typewriter effect
  - Find a way to export to a single minified file
  - Add light / dark mode switch
+ - Allow player to choose text speed
+ - Actually comment my code
