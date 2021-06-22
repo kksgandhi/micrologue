@@ -34,4 +34,5 @@ TODO
  - Find a way to export to a single minified file
  - Add light / dark mode switch
  - Allow player to choose text speed
+ - Add javascript hooks for running code on passage entry
  - Actually comment my code
