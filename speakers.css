@@ -1,0 +1,7 @@
+/* The default stylesheets are based on solarized. I suggest using colors from the solarized pallet for the speaker colors. */
+/* https://en.wikipedia.org/wiki/Solarized_(color_scheme) */
+/* https://thomasf.github.io/solarized-css/ */
+
+.green_speaker {
+  color: #859900;
+}
