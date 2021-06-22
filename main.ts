@@ -69,6 +69,8 @@ let renderPassageTypewriter = async (passage: passage) => {
             let character = characters[charidx];
             if (character === " ") character = "&nbsp;"
             utteranceElem.innerHTML = utteranceElem.innerHTML + character;
+            if (character === ".") await sleep(10 * timeBetweenLetters);
+            if (character === ",") await sleep(5 * timeBetweenLetters);
             await sleep(timeBetweenLetters);
         }
         await sleep(timeBetweenSpeakers);
