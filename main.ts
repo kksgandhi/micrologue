@@ -73,17 +73,6 @@ let renderPassageTypewriter = async (passage: passage) => {
         }
         await sleep(timeBetweenSpeakers);
     }
-    /**
-    passage.utterances.forEach(async (utterance) => {
-        let utteranceElem = document.createElement("p");
-        utteranceElem.setAttribute("class", utterance.speaker);
-        main.appendChild(utteranceElem);
-        utterance.text.split('').forEach(async (character) => {
-            utteranceElem.innerText = utteranceElem.innerText + character;
-            await sleep(5);
-        });
-    });
-    */
     renderLinksGeneric(main, passage.links, renderPassageTypewriter);
 }
 
