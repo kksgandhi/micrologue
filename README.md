@@ -14,7 +14,7 @@ Beginner's Guide
 
 Instructions for those who just want to check out the project, or don't have much coding skill.
 
-Go to the releases section on the right, download `release.zip` from the latest release, unzip it, and open `index.html`
+Go to the releases section on the right, download `release.zip` from the latest release, unzip it, and open `index.html` to see the demo game.
 
  - You can change `<title>` in index.html to give your story a new title
  - You can change `solarized-dark` to `solarized-light` in index.html to change the colorscheme from light to dark.
