@@ -16,7 +16,7 @@ Instructions for those who just want to check out the project, or don't have muc
 
 Go to the releases section on the right, download `release.zip` from the latest release, unzip it, and open `index.html` to see the demo game.
 
- - You can change `<title>` in index.html to give your story a new title
+ - You can change `<title>` in `index.html` to give your story a new title
  - You can change `solarized-dark` to `solarized-light` in index.html to change the colorscheme from light to dark.
  - You can change the colors for the various speakers in `speakers.css`
  - There are a couple of customization options in `configuration.js`
@@ -26,7 +26,7 @@ To actually write your own text, open `passages.js`. There is some commenting wi
 Advanced Guide
 --------------
 
-Clone the repository and use the typescript compiler to compile passages.ts and main.ts into their respective js files.
+Clone the repository and use the typescript compiler to compile the various .ts files into their respective js files.
 
 TODO
 ----
