@@ -9,10 +9,10 @@ let passages: passages = {
          */
         utterances: [{
             speaker: "primo",
-            text: "Hi I am the first speaker"
+            text: "Hi, I am the first speaker. I am speaking. Isn't speaking great."
         },{
             speaker: "green_speaker",
-            text: "I am the second speaker, I've been recolored green",
+            text: "I am the second speaker, I've been recolored green. Being green is amazing.",
         }, {
             speaker: "primo",
             text: "More words. Words words words.",
@@ -26,16 +26,16 @@ let passages: passages = {
     "second passage": {
         utterances: [{
             speaker: "primo",
-            text: "Congrats, you've made it to the second passage"
+            text: "Congrats, you've made it to the second passage."
         },{
             speaker: "green_speaker",
-            text: "I remain green",
+            text: "I remain green.",
         },],
         links: [{
             text: "Re-do the second passage",
             passageTitle: "second passage",
         },{
-            text: "back to the beginnning somehow!",
+            text: "Back to the beginnning!",
             passageTitle: "intro"
         }, {
             text: "This also goes to the second passage, but the wording of the link is different",
