@@ -74,6 +74,7 @@ let renderPassageTypewriter = async (passage: passage) => {
             await sleep(timeBetweenLetters);
         }
         await sleep(timeBetweenSpeakers);
+        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
     }
     renderLinksGeneric(main, passage.links, renderPassageTypewriter);
 }
