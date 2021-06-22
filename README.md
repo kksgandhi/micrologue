@@ -31,7 +31,6 @@ Clone the repository and use the typescript compiler to compile passages.ts and 
 TODO
 ----
 
- - Start passage as variable
  - Typewriter effect
  - Find a way to export to a single minified file
  - Add light / dark mode switch
