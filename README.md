@@ -19,6 +19,7 @@ Go to the releases section on the right, download `release.zip` from the latest 
  - You can change `<title>` in index.html to give your story a new title
  - You can change `solarized-dark` to `solarized-light` in index.html to change the colorscheme from light to dark.
  - You can change the colors for the various speakers in `speakers.css`
+ - There are a couple of customization options in `configuration.js`
 
 To actually write your own text, open `passages.js`. There is some commenting within the file that should hopefully help you along.
 
