@@ -29,12 +29,15 @@ let renderPassage = (passage: passage) => {
         let linkElem = document.createElement("a");
         linkElem.innerText = link.text;
         linkElem.onclick = () => {
-            if (linkElem.getAttribute("class") === "clicked")
-                return false;
+            if (linkElem.getAttribute("class") === "clicked") return false;
+            if (linkElem.getAttribute("class") === "unclicked-no-clear") return false;
             else {
                 linkElem.setAttribute("class", "clicked");
                 Array.from(document.getElementsByClassName("unclicked"))
-                                   .forEach(elem => elem.remove());
+                                   .forEach(elem => {
+                                       if (clearOldLinks) elem.remove();
+                                       else elem.setAttribute("class", "unclicked-no-clear")
+                                   });
                 renderPassage(passages[link.passageTitle]);
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
                 return false;
@@ -47,4 +50,4 @@ let renderPassage = (passage: passage) => {
     });
 }
 
-renderPassage(passages["intro"]);
+renderPassage(passages[startingPassageTitle]);
