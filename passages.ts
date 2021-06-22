@@ -9,7 +9,7 @@ let passages: passages = {
          */
         utterances: [{
             speaker: "primo",
-            text: "Hi, I am the first speaker. I am speaking. Isn't speaking great."
+            text: "Hi, I am the first speaker. I am speaking. Isn't speaking great?"
         },{
             speaker: "green_speaker",
             text: "I am the second speaker, I've been recolored green. Being green is amazing.",
