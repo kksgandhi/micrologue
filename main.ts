@@ -14,6 +14,7 @@ type passage = {
     readonly onEnter?:      () => void,
     readonly onLinkRender?: () => void,
     readonly onExit?:       () => void,
+    readonly autoLink?:     string,
 }
 
 type passages = {
@@ -22,7 +23,21 @@ type passages = {
 
 type renderer = (passage: passage) => void;
 
+let getPassage = (passageName: string) => {
+    if (passageName in passages) return passages[passageName];
+    else {
+        alert("This passage doesn't lead anywhere");
+        return passages[startingPassageTitle];
+    }
+}
 let renderLinksGeneric = (main: Element, passage: passage) => {
+    if (passage.links.length === 0) {
+        if ('autoLink' in passage) {
+            renderPassageGeneric(getPassage(passage.autoLink!));
+        }
+        else console.warn("Links were empty and there was no autolink. Is this the end of your story or did you mess up somewhere?");
+    }
+    else {
     passage.links.forEach(link => {
         let linkElem = document.createElement("a");
         linkElem.innerText = link.text;
@@ -36,7 +51,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
                                        if (clearOldLinks) elem.remove();
                                        else elem.setAttribute("class", "unclicked-no-clear")
                                    });
-                renderPassageGeneric(passages[link.passageTitle]);
+                renderPassageGeneric(getPassage(link.passageTitle));
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
                 if ('onExit' in passage) passage.onExit!();
                 return false;
@@ -47,6 +62,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
         main.appendChild(document.createElement("br"));
         main.appendChild(document.createElement("br"));
     });
+    }
     if ('onLinkRender' in passage) passage.onLinkRender!();
 }
 

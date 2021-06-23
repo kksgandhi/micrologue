@@ -43,6 +43,9 @@ let passages: passages = {
         }, {
             text: "See the power of javascript",
             passageTitle: "js passage"
+        }, {
+            text: "See the power of autolinks",
+            passageTitle: "autolink passage"
         }]
     },
     "js passage": {
@@ -65,5 +68,15 @@ let passages: passages = {
         onEnter:      () => alert("You have entered this passage"),
         onExit:       () => alert("You are exiting the passage"),
         onLinkRender: () => alert("The links are rendering"),
+    },
+    "autolink passage": {
+        utterances: [{
+            speaker: "primo",
+            text: "This passage will return to the second passage without any user interaction."
+        }],
+        // leave the links array empty. If it is not empty, the links will be rendered and the autolink will be ignored
+        links: [],
+        // and add a parameter called autoLink
+        autoLink: "second passage",
     }
 }
