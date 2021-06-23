@@ -28,6 +28,8 @@ Advanced Guide
 
 Clone the repository and use the typescript compiler to compile the various .ts files into their respective js files.
 
+The "speaker name" parameter in passages sets the class of the `<p>`, so you can apply whatever css you want to it.
+
 TODO
 ----
 
