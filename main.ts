@@ -38,30 +38,30 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
         else console.warn("Links were empty and there was no autolink. Is this the end of your story or did you mess up somewhere?");
     }
     else {
-    passage.links.forEach(link => {
-        let linkElem = document.createElement("a");
-        linkElem.innerText = link.text;
-        linkElem.onclick = () => {
-            if (linkElem.getAttribute("class") === "clicked") return false;
-            if (linkElem.getAttribute("class") === "unclicked-no-clear") return false;
-            else {
-                linkElem.setAttribute("class", "clicked");
-                Array.from(document.getElementsByClassName("unclicked"))
-                                   .forEach(elem => {
-                                       if (clearOldLinks) elem.remove();
-                                       else elem.setAttribute("class", "unclicked-no-clear")
-                                   });
-                renderPassageGeneric(getPassage(link.passageTitle));
-                window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-                if ('onExit' in passage) passage.onExit!();
-                return false;
-            }
-        };
-        linkElem.setAttribute("class", "unclicked");
-        main.appendChild(linkElem);
-        main.appendChild(document.createElement("br"));
-        main.appendChild(document.createElement("br"));
-    });
+        passage.links.forEach(link => {
+            let linkElem = document.createElement("a");
+            linkElem.innerText = link.text;
+            linkElem.onclick = () => {
+                if (linkElem.getAttribute("class") === "clicked") return false;
+                if (linkElem.getAttribute("class") === "unclicked-no-clear") return false;
+                else {
+                    linkElem.setAttribute("class", "clicked");
+                    Array.from(document.getElementsByClassName("unclicked"))
+                        .forEach(elem => {
+                            if (clearOldLinks) elem.remove();
+                            else elem.setAttribute("class", "unclicked-no-clear")
+                        });
+                    renderPassageGeneric(getPassage(link.passageTitle));
+                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+                    if ('onExit' in passage) passage.onExit!();
+                    return false;
+                }
+            };
+            linkElem.setAttribute("class", "unclicked");
+            main.appendChild(linkElem);
+            main.appendChild(document.createElement("br"));
+            main.appendChild(document.createElement("br"));
+        });
     }
     if ('onLinkRender' in passage) passage.onLinkRender!();
 }
