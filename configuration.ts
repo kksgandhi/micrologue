@@ -10,6 +10,10 @@ let doTypewriterEffect = true;
 let timeBetweenLetters = 30;
 // Time between speakers, assuming you are using typewriter effect (milliseconds)
 let timeBetweenSpeakers = 300;
+// How much extra delay should a comma have?
+let commaDelay = 150;
+// How much extra delay should a period and other punction (example !?:) have?
+let periodDelay = 300;
 
 // JS hooks
 // runs on entering any passage

@@ -130,12 +130,13 @@ let renderPassageTypewriter = async (passage: passage) => {
                 // append the character to the HTML paragraph. Replace any previous non breaking spaces for simplicity and to enable word breaking.
                 utteranceElem.innerHTML = utteranceElem.innerHTML.replace("&nbsp;", " ") + character;
                 // if the character was punctuation, wait a bit longer
-                if (character === ".") await sleep(10 * timeBetweenLetters);
-                if (character === ":") await sleep(10 * timeBetweenLetters);
-                if (character === ";") await sleep(10 * timeBetweenLetters);
-                if (character === "!") await sleep(10 * timeBetweenLetters);
-                if (character === "-") await sleep(10 * timeBetweenLetters);
-                if (character === ",") await sleep(5 * timeBetweenLetters);
+                if (character === ".") await sleep(periodDelay);
+                if (character === ":") await sleep(periodDelay);
+                if (character === ";") await sleep(periodDelay);
+                if (character === "!") await sleep(periodDelay);
+                if (character === "?") await sleep(periodDelay);
+                if (character === "-") await sleep(periodDelay);
+                if (character === ",") await sleep(commaDelay);
                 // wait between characters
                 await sleep(timeBetweenLetters);
             }
