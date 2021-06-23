@@ -7,9 +7,9 @@ let clearOldLinks = true;
 // Enable typewriter effect
 let doTypewriterEffect = true;
 // Time between letters for a speaker, assuming you are using typewriter effect (milliseconds)
-let timeBetweenLetters = 0;
+let timeBetweenLetters = 30;
 // Time between speakers, assuming you are using typewriter effect (milliseconds)
-let timeBetweenSpeakers = 0;
+let timeBetweenSpeakers = 300;
 
 // JS hooks
 // runs on entering any passage
