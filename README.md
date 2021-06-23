@@ -37,6 +37,7 @@ Features
  - Multiple speakers, each with their own css
  - js hooks to run arbitrary js code on passage entry, on passage render finish, and on passage exit.
    - These hooks can be used to modify state variables
+ - js hooks to allow passages to be hidden or shown depending on state
  - Autolinks, allowing you to jump from passage to passage without user interaction
 
 To actually understand how to use these features, open `passages.js` and read the comments therein.
