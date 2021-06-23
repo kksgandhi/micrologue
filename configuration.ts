@@ -10,3 +10,11 @@ let doTypewriterEffect = true;
 let timeBetweenLetters = 0;
 // Time between speakers, assuming you are using typewriter effect (milliseconds)
 let timeBetweenSpeakers = 0;
+
+// JS hooks
+// runs on entering any passage
+let onAnyEnter      = (passage: passage) => console.log(`Entering ${getPassageTitle(passage)}`)
+// runs on exiting any passage
+let onAnyExit       = (passage: passage) => console.log(`Exiting ${getPassageTitle(passage)}`)
+// runs on the links rendering for any passage
+let onAnyLinkRender = (passage: passage) => console.log(`Links rendering for ${getPassageTitle(passage)}`)

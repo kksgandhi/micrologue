@@ -28,8 +28,13 @@ let getPassage = (passageName: string) => {
         return passages[startingPassageTitle];
     }
 }
+
+let getPassageTitle = (passage: passage) => Object.keys(passages).find(key => passages[key] === passage);
+
 let renderLinksGeneric = (main: Element, passage: passage) => {
     if (passage.links.length === 0) {
+        if ('onExit' in passage) passage.onExit!();
+        onAnyExit(passage);
         if ('autoLink' in passage) renderPassageGeneric(getPassage(passage.autoLink!));
         else console.warn("Links were empty and there was no autolink. Is this the end of your story or did you mess up somewhere?");
     }
@@ -47,9 +52,10 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
                             if (clearOldLinks) elem.remove();
                             else elem.setAttribute("class", "unclicked-no-clear")
                         });
+                    if ('onExit' in passage) passage.onExit!();
+                    onAnyExit(passage);
                     renderPassageGeneric(getPassage(link.passageTitle));
                     window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
-                    if ('onExit' in passage) passage.onExit!();
                     return false;
                 }
             };
@@ -60,6 +66,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
         });
     }
     if ('onLinkRender' in passage) passage.onLinkRender!();
+    onAnyLinkRender(passage);
 }
 
 let renderPassageSimple = (passage: passage) => {
@@ -102,6 +109,7 @@ let renderPassageTypewriter = async (passage: passage) => {
 
 let renderPassageGeneric = (passage: passage) => {
     if ('onEnter' in passage) passage.onEnter!();
+    onAnyEnter(passage);
 
     if (doTypewriterEffect) renderPassageTypewriter(passage);
     else                    renderPassageSimple(passage);
