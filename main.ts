@@ -1,11 +1,13 @@
 type utterance = {
-    readonly speaker: string,
-    readonly text:    string
+    readonly speaker:        string,
+    readonly text:           string
+    readonly showUtterance?: () => boolean,
 }
 
 type link = {
     readonly text:         string,
     readonly passageTitle: string
+    readonly showLink?:    () => boolean,
 }
 
 type passage = {
@@ -49,37 +51,40 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
     else {
         // Oh there are links? Let's insert them
         passage.links.forEach(link => {
-            let linkElem = document.createElement("a");
-            linkElem.innerText = link.text;
-            // Set the onclick property to render the next passage
-            linkElem.onclick = () => {
-                // don't do anything if the link has been clicked in the past (or if the link was unclicked, but part of a group of links where another one was clicked)
-                if (linkElem.getAttribute("class") === "clicked") return false;
-                if (linkElem.getAttribute("class") === "old-link") return false;
-                else {
-                    // set this link as clicked
-                    linkElem.setAttribute("class", "clicked");
-                    // either remove all the other unclicked links, or mark them as an old links
-                    Array.from(document.getElementsByClassName("unclicked"))
-                        .forEach(elem => {
-                            if (clearOldLinks) elem.remove();
-                            else elem.setAttribute("class", "old-link")
-                        });
-                    // run the onExit hooks
-                    if ('onExit' in passage) passage.onExit!();
-                    onAnyExit(passage);
-                    // render the passage this points to
-                    renderPassageGeneric(getPassage(link.passageTitle));
-                    scrollToBottom();
-                    return false;
-                }
-            };
-            // set as unclicked and append to the main flow
-            linkElem.setAttribute("class", "unclicked");
-            main.appendChild(linkElem);
-            main.appendChild(document.createElement("br"));
-            main.appendChild(document.createElement("br"));
-            scrollToBottom();
+            // render the link only if the link has no "showLink" hook or if the showLink hook passes
+            if (!('showLink' in link) || link.showLink!()) {
+                let linkElem = document.createElement("a");
+                linkElem.innerText = link.text;
+                // Set the onclick property to render the next passage
+                linkElem.onclick = () => {
+                    // don't do anything if the link has been clicked in the past (or if the link was unclicked, but part of a group of links where another one was clicked)
+                    if (linkElem.getAttribute("class") === "clicked") return false;
+                    if (linkElem.getAttribute("class") === "old-link") return false;
+                    else {
+                        // set this link as clicked
+                        linkElem.setAttribute("class", "clicked");
+                        // either remove all the other unclicked links, or mark them as an old links
+                        Array.from(document.getElementsByClassName("unclicked"))
+                            .forEach(elem => {
+                                if (clearOldLinks) elem.remove();
+                                else elem.setAttribute("class", "old-link")
+                            });
+                        // run the onExit hooks
+                        if ('onExit' in passage) passage.onExit!();
+                        onAnyExit(passage);
+                        // render the passage this points to
+                        renderPassageGeneric(getPassage(link.passageTitle));
+                        scrollToBottom();
+                        return false;
+                    }
+                };
+                // set as unclicked and append to the main flow
+                linkElem.setAttribute("class", "unclicked");
+                main.appendChild(linkElem);
+                main.appendChild(document.createElement("br"));
+                main.appendChild(document.createElement("br"));
+                scrollToBottom();
+            }
         });
     }
     // run links rendering hook
@@ -92,10 +97,13 @@ let renderPassageSimple = (passage: passage) => {
     let main = document.getElementById("main")!;
     // simple append of all the passages
     passage.utterances.forEach(utterance => {
-        let utteranceElem = document.createElement("p");
-        utteranceElem.setAttribute("class", utterance.speaker);
-        utteranceElem.innerText = utterance.text;
-        main.appendChild(utteranceElem);
+        // render the utterance only if the utterance has no "showUtterance" hook or if the showUtterance hook passes
+        if (!('showUtterance' in utterance) || utterance.showUtterance!()) {
+            let utteranceElem = document.createElement("p");
+            utteranceElem.setAttribute("class", utterance.speaker);
+            utteranceElem.innerText = utterance.text;
+            main.appendChild(utteranceElem);
+        }
     });
     renderLinksGeneric(main, passage);
 }
@@ -108,30 +116,33 @@ let renderPassageTypewriter = async (passage: passage) => {
     // for every utterance...
     for (let idx in passage.utterances) {
         let utterance = passage.utterances[idx];
-        let utteranceElem = document.createElement("p");
-        utteranceElem.setAttribute("class", utterance.speaker);
-        main.appendChild(utteranceElem);
-        let characters = Array.from(utterance.text);
-        // instead of blindly appending the text, split it up into an array of characters and loop through
-        for (let charidx in characters) {
-            let character = characters[charidx];
-            // a space has to be converted to a non breaking space because HTML is silly
-            if (character === " ") character = "&nbsp;"
-            // append the character to the HTML paragraph
-            utteranceElem.innerHTML = utteranceElem.innerHTML + character;
-            // if the character was punctuation, wait a bit longer
-            if (character === ".") await sleep(10 * timeBetweenLetters);
-            if (character === ":") await sleep(10 * timeBetweenLetters);
-            if (character === ";") await sleep(10 * timeBetweenLetters);
-            if (character === "!") await sleep(10 * timeBetweenLetters);
-            if (character === "-") await sleep(10 * timeBetweenLetters);
-            if (character === ",") await sleep(5 * timeBetweenLetters);
-            // wait between characters
-            await sleep(timeBetweenLetters);
+        // render the utterance only if the utterance has no "showUtterance" hook or if the showUtterance hook passes
+        if (!('showUtterance' in utterance) || utterance.showUtterance!()) {
+            let utteranceElem = document.createElement("p");
+            utteranceElem.setAttribute("class", utterance.speaker);
+            main.appendChild(utteranceElem);
+            let characters = Array.from(utterance.text);
+            // instead of blindly appending the text, split it up into an array of characters and loop through
+            for (let charidx in characters) {
+                let character = characters[charidx];
+                // a space has to be converted to a non breaking space because HTML is silly
+                if (character === " ") character = "&nbsp;"
+                // append the character to the HTML paragraph
+                utteranceElem.innerHTML = utteranceElem.innerHTML + character;
+                // if the character was punctuation, wait a bit longer
+                if (character === ".") await sleep(10 * timeBetweenLetters);
+                if (character === ":") await sleep(10 * timeBetweenLetters);
+                if (character === ";") await sleep(10 * timeBetweenLetters);
+                if (character === "!") await sleep(10 * timeBetweenLetters);
+                if (character === "-") await sleep(10 * timeBetweenLetters);
+                if (character === ",") await sleep(5 * timeBetweenLetters);
+                // wait between characters
+                await sleep(timeBetweenLetters);
+            }
+            // wait between speakers
+            await sleep(timeBetweenSpeakers);
+            scrollToBottom();
         }
-        // wait between speakers
-        await sleep(timeBetweenSpeakers);
-        scrollToBottom();
     }
     // render the links
     renderLinksGeneric(main, passage);

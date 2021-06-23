@@ -30,7 +30,7 @@ let passages: passages = {
     "second passage": {
         utterances: [{
             speaker: "primo",
-            text: "Congrats, you've made it to the second passage."
+            text: "Congrats, you've made it to the second passage.",
         },{
             speaker: "green_speaker",
             text: "I remain green.",
@@ -52,10 +52,17 @@ let passages: passages = {
             passageTitle: "autolink passage"
         }]
     },
+    // If you are a beginner, the following passages will show off advanced features that you may want to avoid just now for the sake of simplicity
     "js passage": {
         utterances: [{
             speaker: "primo",
-            text: "This passage has the power of javascript (aka it should put out some alerts)"
+            text: "This passage has the power of javascript (aka it should put out some alerts)",
+            // showUtterance is a lambda that decides whether or not this utterance should be shown
+            showUtterance: () => true,
+        },{
+            speaker: "green_speaker",
+            text: "This utterance will not be shown because the lambda evaluates to false",
+            showUtterance: () => 2 + 2 === 5,
         }],
         links: [{
             text: "Re-do the second passage",
@@ -66,6 +73,11 @@ let passages: passages = {
         }, {
             text: "Want more alerts?",
             passageTitle: "js passage"
+        }, {
+            text: "This link won't be shown because its lambda evaluates to false",
+            passageTitle: "js passage",
+            // Just like showUtterance, there is showLink, which is a lambda that decides if a link should appear
+            showLink: () => false,
         }],
         // add javascript hooks to your passages. Unfortunately to use this you'll need some coding experience
         // These properties are optional for any passage
