@@ -31,6 +31,8 @@ let getPassage = (passageName: string) => {
 
 let getPassageTitle = (passage: passage) => Object.keys(passages).find(key => passages[key] === passage);
 
+let scrollToBottom = () => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' });
+
 let renderLinksGeneric = (main: Element, passage: passage) => {
     if (passage.links.length === 0) {
         if ('onExit' in passage) passage.onExit!();
@@ -55,7 +57,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
                     if ('onExit' in passage) passage.onExit!();
                     onAnyExit(passage);
                     renderPassageGeneric(getPassage(link.passageTitle));
-                    window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+                    scrollToBottom();
                     return false;
                 }
             };
@@ -63,6 +65,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
             main.appendChild(linkElem);
             main.appendChild(document.createElement("br"));
             main.appendChild(document.createElement("br"));
+            scrollToBottom();
         });
     }
     if ('onLinkRender' in passage) passage.onLinkRender!();
@@ -102,7 +105,7 @@ let renderPassageTypewriter = async (passage: passage) => {
             await sleep(timeBetweenLetters);
         }
         await sleep(timeBetweenSpeakers);
-        window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+        scrollToBottom();
     }
     renderLinksGeneric(main, passage);
 }
