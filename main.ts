@@ -30,9 +30,7 @@ let getPassage = (passageName: string) => {
 }
 let renderLinksGeneric = (main: Element, passage: passage) => {
     if (passage.links.length === 0) {
-        if ('autoLink' in passage) {
-            renderPassageGeneric(getPassage(passage.autoLink!));
-        }
+        if ('autoLink' in passage) renderPassageGeneric(getPassage(passage.autoLink!));
         else console.warn("Links were empty and there was no autolink. Is this the end of your story or did you mess up somewhere?");
     }
     else {
