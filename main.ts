@@ -21,8 +21,6 @@ type passages = {
     [passageTitle: string]: passage
 }
 
-type renderer = (passage: passage) => void;
-
 let getPassage = (passageName: string) => {
     if (passageName in passages) return passages[passageName];
     else {
