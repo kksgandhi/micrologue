@@ -1,7 +1,11 @@
+/**
+ * I did my best with this documentation, but it's still not the best. If others start using this, I'll update it
+ */
 let passages: passages = {
     /* intro is the first passage
      * A passage is defined as "passage title" followed by a : followed by a {
      * The passage goes until }
+     * For more information, look up json notation
      */
     "intro": {
         /*
@@ -76,7 +80,7 @@ let passages: passages = {
         }],
         // leave the links array empty. If it is not empty, the links will be rendered and the autolink will be ignored
         links: [],
-        // and add a parameter called autoLink
+        // and add a parameter called autoLink with the passage name of whatever passage you want to automatically go to
         autoLink: "second passage",
     }
 }
