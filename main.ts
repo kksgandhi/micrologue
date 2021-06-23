@@ -1,16 +1,19 @@
 type utterance = {
-    speaker: string,
-    text:    string
+    readonly speaker: string,
+    readonly text:    string
 }
 
 type link = {
-    text:         string,
-    passageTitle: string
+    readonly text:         string,
+    readonly passageTitle: string
 }
 
 type passage = {
-    utterances: utterance[],
-    links:      link[]
+    readonly utterances:    utterance[],
+    readonly links:         link[]
+    readonly onEnter?:      () => void,
+    readonly onLinkRender?: () => void,
+    readonly onExit?:       () => void,
 }
 
 type passages = {
@@ -19,8 +22,8 @@ type passages = {
 
 type renderer = (passage: passage) => void;
 
-let renderLinksGeneric = (main: Element, links: link[], renderer: renderer) => {
-    links.forEach(link => {
+let renderLinksGeneric = (main: Element, passage: passage) => {
+    passage.links.forEach(link => {
         let linkElem = document.createElement("a");
         linkElem.innerText = link.text;
         linkElem.onclick = () => {
@@ -33,8 +36,9 @@ let renderLinksGeneric = (main: Element, links: link[], renderer: renderer) => {
                                        if (clearOldLinks) elem.remove();
                                        else elem.setAttribute("class", "unclicked-no-clear")
                                    });
-                renderer(passages[link.passageTitle]);
+                renderPassageGeneric(passages[link.passageTitle]);
                 window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
+                if ('onExit' in passage) passage.onExit!();
                 return false;
             }
         };
@@ -43,6 +47,7 @@ let renderLinksGeneric = (main: Element, links: link[], renderer: renderer) => {
         main.appendChild(document.createElement("br"));
         main.appendChild(document.createElement("br"));
     });
+    if ('onLinkRender' in passage) passage.onLinkRender!();
 }
 
 let renderPassageSimple = (passage: passage) => {
@@ -53,7 +58,7 @@ let renderPassageSimple = (passage: passage) => {
         utteranceElem.innerText = utterance.text;
         main.appendChild(utteranceElem);
     });
-    renderLinksGeneric(main, passage.links, renderPassageSimple);
+    renderLinksGeneric(main, passage);
 }
 
 let sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
@@ -80,10 +85,15 @@ let renderPassageTypewriter = async (passage: passage) => {
         await sleep(timeBetweenSpeakers);
         window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })
     }
-    renderLinksGeneric(main, passage.links, renderPassageTypewriter);
+    renderLinksGeneric(main, passage);
 }
 
-if (doTypewriterEffect)
-    renderPassageTypewriter(passages[startingPassageTitle]);
-else
-    renderPassageSimple(passages[startingPassageTitle]);
+let renderPassageGeneric = (passage: passage) => {
+    if ('onEnter' in passage) passage.onEnter!();
+
+    if (doTypewriterEffect) renderPassageTypewriter(passage);
+    else                    renderPassageSimple(passage);
+}
+
+renderPassageGeneric(passages[startingPassageTitle])
+

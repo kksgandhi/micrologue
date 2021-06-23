@@ -40,6 +40,30 @@ let passages: passages = {
         }, {
             text: "This also goes to the second passage, but the wording of the link is different",
             passageTitle: "second passage"
+        }, {
+            text: "See the power of javascript",
+            passageTitle: "js passage"
         }]
+    },
+    "js passage": {
+        utterances: [{
+            speaker: "primo",
+            text: "This passage has the power of javascript (aka it should put out some alerts)"
+        }],
+        links: [{
+            text: "Re-do the second passage",
+            passageTitle: "second passage",
+        },{
+            text: "Back to the beginnning!",
+            passageTitle: "intro"
+        }, {
+            text: "Want more alerts?",
+            passageTitle: "js passage"
+        }],
+        // add javascript hooks to your passages. Unfortunately to use this you'll need some coding experience
+        // These properties are optional for any passage
+        onEnter:      () => alert("You have entered this passage"),
+        onExit:       () => alert("You are exiting the passage"),
+        onLinkRender: () => alert("The links are rendering"),
     }
 }
