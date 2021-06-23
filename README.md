@@ -41,6 +41,8 @@ Features
 
 To actually understand how to use these features, open `passages.js` and read the comments therein.
 
+The "speaker name" parameter in passages sets the class of the `<p>`, so you can apply whatever css you want to it.
+
 TODO
 ----
 
