@@ -127,8 +127,8 @@ let renderPassageTypewriter = async (passage: passage) => {
                 let character = characters[charidx];
                 // a space has to be converted to a non breaking space because HTML is silly
                 if (character === " ") character = "&nbsp;"
-                // append the character to the HTML paragraph
-                utteranceElem.innerHTML = utteranceElem.innerHTML + character;
+                // append the character to the HTML paragraph. Replace any previous non breaking spaces for simplicity and to enable word breaking.
+                utteranceElem.innerHTML = utteranceElem.innerHTML.replace("&nbsp;", " ") + character;
                 // if the character was punctuation, wait a bit longer
                 if (character === ".") await sleep(10 * timeBetweenLetters);
                 if (character === ":") await sleep(10 * timeBetweenLetters);
