@@ -30,7 +30,7 @@ let passages: passages = {
     "second passage": {
         utterances: [{
             speaker: "primo",
-            text: "Congrats, you've made it to the second passage.",
+            text: "Second passage here",
         },{
             speaker: "green_speaker",
             text: "I remain green.",
@@ -93,6 +93,7 @@ let passages: passages = {
         // leave the links array empty. If it is not empty, the links will be rendered and the autolink will be ignored
         links: [],
         // and add a parameter called autoLink with the passage name of whatever passage you want to automatically go to
-        autoLink: "second passage",
+        // If you don't know js and are unsure what the () => is about, don't worry about it, you can just copy it for future autolinks
+        autoLink: () => "second passage",
     }
 }

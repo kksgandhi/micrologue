@@ -16,7 +16,7 @@ type passage = {
     readonly onEnter?:      () => void,
     readonly onLinkRender?: () => void,
     readonly onExit?:       () => void,
-    readonly autoLink?:     string,
+    readonly autoLink?:     () => string,
 }
 
 type passages = {
@@ -45,7 +45,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
         passage.onExit?.();
         onAnyExit(passage);
         // and go there if an autolink is found
-        if ('autoLink' in passage) renderPassageGeneric(getPassage(passage.autoLink!));
+        if ('autoLink' in passage) renderPassageGeneric(getPassage(passage.autoLink!()));
         else console.warn("Links were empty and there was no autolink. Is this the end of your story or did you mess up somewhere?");
     }
     else {
