@@ -50,6 +50,9 @@ let passages: passages = {
         }, {
             text: "See the power of autolinks",
             passageTitle: "autolink passage"
+        }, {
+            text: "See dynamic text",
+            passageTitle: "dynamic text"
         }]
     },
     // If you are a beginner, the following passages will show off advanced features that you may want to avoid just now for the sake of simplicity
@@ -95,5 +98,19 @@ let passages: passages = {
         // and add a parameter called autoLink with the passage name of whatever passage you want to automatically go to
         // If you don't know js and are unsure what the () => is about, don't worry about it, you can just copy it for future autolinks
         autoLink: () => "second passage",
+    },
+    "dynamic text": {
+        utterances: [{
+            speaker: "primo",
+            text: "This text will be ignored because dynamicText takes precedence",
+            // The output of the dynamicText function will be displayed, and 'text' will be ignored
+            dynamicText: () => "The current date is: " + new Date(),
+        }, {
+            speaker: "green_speaker",
+            text: "Returning to second passage"
+        }],
+        // dynamicText can also be used in links. I don't have an example, but it's pretty much the same thing.
+        links: [],
+        autoLink: () => "second passage"
     }
 }

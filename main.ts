@@ -2,12 +2,14 @@ type utterance = {
     readonly speaker:        string,
     readonly text:           string
     readonly showUtterance?: () => boolean,
+    readonly dynamicText?:   () => string,
 }
 
 type link = {
     readonly text:         string,
     readonly passageTitle: string
     readonly showLink?:    () => boolean,
+    readonly dynamicText?: () => boolean,
 }
 
 type passage = {
@@ -101,7 +103,8 @@ let renderPassageSimple = (passage: passage) => {
         if (!('showUtterance' in utterance) || utterance.showUtterance!()) {
             let utteranceElem = document.createElement("p");
             utteranceElem.setAttribute("class", utterance.speaker);
-            utteranceElem.innerText = utterance.text;
+            // Use the dynamic text if it exists, else use the normal text
+            utteranceElem.innerText = utterance.dynamicText?.() || utterance.text;
             main.appendChild(utteranceElem);
         }
     });
@@ -121,7 +124,8 @@ let renderPassageTypewriter = async (passage: passage) => {
             let utteranceElem = document.createElement("p");
             utteranceElem.setAttribute("class", utterance.speaker);
             main.appendChild(utteranceElem);
-            let characters = Array.from(utterance.text);
+            // Use the dynamic text if it exists, else use the normal text
+            let characters = Array.from(utterance.dynamicText?.() || utterance.text);
             // instead of blindly appending the text, split it up into an array of characters and loop through
             for (let charidx in characters) {
                 let character = characters[charidx];
