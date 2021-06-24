@@ -42,7 +42,7 @@ let scrollToBottom = () => window.scrollTo({ top: document.body.scrollHeight, be
 let renderLinksGeneric = (main: Element, passage: passage) => {
     // No links in the passage? Check for an autolink
     if (passage.links.length === 0) {
-        if ('onExit' in passage) passage.onExit!();
+        passage.onExit?.();
         onAnyExit(passage);
         // and go there if an autolink is found
         if ('autoLink' in passage) renderPassageGeneric(getPassage(passage.autoLink!));
@@ -70,7 +70,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
                                 else elem.setAttribute("class", "old-link")
                             });
                         // run the onExit hooks
-                        if ('onExit' in passage) passage.onExit!();
+                        passage.onExit?.();
                         onAnyExit(passage);
                         // render the passage this points to
                         renderPassageGeneric(getPassage(link.passageTitle));
@@ -88,7 +88,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
         });
     }
     // run links rendering hook
-    if ('onLinkRender' in passage) passage.onLinkRender!();
+    passage.onLinkRender?.();
     onAnyLinkRender(passage);
 }
 
@@ -152,7 +152,7 @@ let renderPassageTypewriter = async (passage: passage) => {
 // the entrypoint function for rendering any passage
 let renderPassageGeneric = (passage: passage) => {
     // run the hooks
-    if ('onEnter' in passage) passage.onEnter!();
+    passage.onEnter?.();
     onAnyEnter(passage);
 
     // render based on whether configuration asks for a typewriter effect or not
