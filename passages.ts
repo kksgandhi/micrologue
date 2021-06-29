@@ -119,6 +119,7 @@ let passages: passages = {
             text: "Returning to second passage"
         }],
         // dynamicText can also be used in links. I don't have an example, but it's pretty much the same thing.
+        // Furthermore, if you want a link to point somewhere different, you can use dynamicReference
         links: [],
         autoLink: () => "second passage"
     }

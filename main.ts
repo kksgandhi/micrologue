@@ -6,10 +6,11 @@ type utterance = {
 }
 
 type link = {
-    readonly text:         string,
-    readonly passageTitle: string
-    readonly showLink?:    () => boolean,
-    readonly dynamicText?: () => boolean,
+    readonly text:              string,
+    readonly passageTitle:      string
+    readonly showLink?:         () => boolean,
+    readonly dynamicText?:      () => boolean,
+    readonly dynamicReference?: () => string,
 }
 
 type passage = {
@@ -74,8 +75,8 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
                         // run the onExit hooks
                         passage.onExit?.();
                         onAnyExit(passage);
-                        // render the passage this points to
-                        renderPassageGeneric(getPassage(link.passageTitle));
+                        // render the passage this points to. Use the dynamicReference if it exists, or just the normal reference
+                        renderPassageGeneric(getPassage(link.dynamicReference?.() || link.passageTitle));
                         scrollToBottom();
                         return false;
                     }
