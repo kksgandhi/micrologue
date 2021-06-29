@@ -197,10 +197,11 @@ To silence this message, set "debug = false" in configuration.js`)
                                 .map(passage => passage.links.map(link => link.passageTitle))
                                 // This is a list of lists, so let's flatten it
                                 .flat();
+    let allLinksAndIntro = allLinkReferences.concat([startingPassageTitle]);
     // is every title accounted for in the list of all the references?
     titlesNonEmpty.forEach(title => 
         doAlertIf(
-            !allLinkReferences.includes(title),
+            !allLinksAndIntro.includes(title),
             `No way to get to passage with title "${title}"`));
 }
 
