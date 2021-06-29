@@ -19,7 +19,7 @@ let passages: passages = {
             text: "I am the second speaker, I've been recolored green. Being green is amazing.",
         }, {
             speaker: "primo",
-            text: "More words. Words words words.",
+            text: "Using HTML, I can <b>bold</b> and <em>emphasize</em> things.",
         }],
         // Each passage also has links. text is the displayed text, passageTitle is where it goes
         links: [{

@@ -104,7 +104,7 @@ let renderPassageSimple = (passage: passage) => {
             let utteranceElem = document.createElement("p");
             utteranceElem.setAttribute("class", utterance.speaker);
             // Use the dynamic text if it exists, else use the normal text
-            utteranceElem.innerText = utterance.dynamicText?.() || utterance.text;
+            utteranceElem.innerHTML = utterance.dynamicText?.() || utterance.text;
             main.appendChild(utteranceElem);
         }
     });
@@ -125,14 +125,12 @@ let renderPassageTypewriter = async (passage: passage) => {
             utteranceElem.setAttribute("class", utterance.speaker);
             main.appendChild(utteranceElem);
             // Use the dynamic text if it exists, else use the normal text
-            let characters = Array.from(utterance.dynamicText?.() || utterance.text);
+            let characters = utterance.dynamicText?.() || utterance.text;
             // instead of blindly appending the text, split it up into an array of characters and loop through
-            for (let charidx in characters) {
+            for (let charidx = 0; charidx < characters.length; charidx++) {
                 let character = characters[charidx];
-                // a space has to be converted to a non breaking space because HTML is silly
-                if (character === " ") character = "&nbsp;"
                 // append the character to the HTML paragraph. Replace any previous non breaking spaces for simplicity and to enable word breaking.
-                utteranceElem.innerHTML = utteranceElem.innerHTML.replace("&nbsp;", " ") + character;
+                utteranceElem.innerHTML = characters.slice(0, charidx + 1);
                 // if the character was punctuation, wait a bit longer
                 if (character === ".") await sleep(periodDelay);
                 if (character === ":") await sleep(periodDelay);
