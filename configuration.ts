@@ -2,6 +2,8 @@
 let startingPassageTitle = "intro";
 // Should unclicked links be cleared away?
 let clearOldLinks = true;
+// leave it as true when working on the project, set it to false when publishing the project.
+let debug = true;
 
 // TYPEWRITER EFFECT
 // Enable typewriter effect

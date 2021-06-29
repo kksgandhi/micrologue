@@ -165,6 +165,17 @@ renderPassageGeneric(passages[startingPassageTitle])
 
 // Ensure there are no typos, hanging passages etc.
 let validatePassages = () => {
+    let doAlertIf = (doAlert: boolean, alertMsg: string) => {
+        if (!doAlert) return;
+        else {
+            if (debug)
+                alert(`${alertMsg}
+                       
+To silence this message, set "debug = false" in configuration.js`)
+            else 
+                console.warn(alertMsg);
+        }
+    }
     // all the titles except for 'empty'. Maybe this could be a configuration var, but it's fine for now
     let titlesNonEmpty = Object.keys(passages)
                                .filter(title => title !== "empty");
@@ -175,10 +186,10 @@ let validatePassages = () => {
               // and the linkReferences in the passage
               let linkReferences = passage.links.map(link => link.passageTitle);
               // is each linkReference included in the list of titles?
-              linkReferences.forEach(linkReference => {
-                  if (!titlesNonEmpty.includes(linkReference))
-                      console.error(`Passage with title "${title}" contains link that leads to "${linkReference}" which does not exist`);
-              });
+              linkReferences.forEach(linkReference => 
+                  doAlertIf(
+                      !titlesNonEmpty.includes(linkReference),
+                      `Passage with title "${title}" contains link that leads to "${linkReference}" which does not exist`));
     });
     // make a mega list of all link references
     let allLinkReferences = Object
@@ -187,10 +198,10 @@ let validatePassages = () => {
                                 // This is a list of lists, so let's flatten it
                                 .flat();
     // is every title accounted for in the list of all the references?
-    titlesNonEmpty.forEach(title => {
-        if (!allLinkReferences.includes(title))
-            console.error(`No way to get to passage with title "${title}"`);
-    });
+    titlesNonEmpty.forEach(title => 
+        doAlertIf(
+            !allLinkReferences.includes(title),
+            `No way to get to passage with title "${title}"`));
 }
 
 validatePassages();
