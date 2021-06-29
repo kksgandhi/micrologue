@@ -126,19 +126,17 @@ let renderPassageTypewriter = async (passage: passage) => {
             main.appendChild(utteranceElem);
             // Use the dynamic text if it exists, else use the normal text
             let characters = utterance.dynamicText?.() || utterance.text;
-            // instead of blindly appending the text, split it up into an array of characters and loop through
+            // for every character index...
             for (let charidx = 0; charidx < characters.length; charidx++) {
-                let character = characters[charidx];
-                // append the character to the HTML paragraph. Replace any previous non breaking spaces for simplicity and to enable word breaking.
+                // convert the innerHTML into the substring upto that index
                 utteranceElem.innerHTML = characters.slice(0, charidx + 1);
-                // if the character was punctuation, wait a bit longer
-                if (character === ".") await sleep(periodDelay);
-                if (character === ":") await sleep(periodDelay);
-                if (character === ";") await sleep(periodDelay);
-                if (character === "!") await sleep(periodDelay);
-                if (character === "?") await sleep(periodDelay);
-                if (character === "-") await sleep(periodDelay);
-                if (character === ",") await sleep(commaDelay);
+                let character = characters[charidx];
+                // if the character was a comma wait a bit
+                if (character === ",") 
+                    await sleep(commaDelay);
+                // if the character was other punctuation, wait a bit longer
+                if (".:;!?-".split('').includes(character))
+                    await sleep(periodDelay);
                 // wait between characters
                 await sleep(timeBetweenLetters);
             }
