@@ -55,6 +55,15 @@ let passages: passages = {
             passageTitle: "dynamic text"
         }]
     },
+    // Here is an empty passage for all your copy pasting needs
+    "empty": {
+        utterances: [
+            { speaker: "", text: "" },
+        ],
+        links: [
+            { text: "", passageTitle: "" },
+        ]
+    },
     // If you are a beginner, the following passages will show off advanced features that you may want to avoid just now for the sake of simplicity
     "js passage": {
         utterances: [{
