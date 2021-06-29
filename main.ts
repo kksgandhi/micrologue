@@ -11,6 +11,7 @@ type link = {
     readonly showLink?:         () => boolean,
     readonly dynamicText?:      () => boolean,
     readonly dynamicReference?: () => string,
+    readonly ignoreDebug?:      boolean,
 }
 
 type passage = {
@@ -20,6 +21,7 @@ type passage = {
     readonly onLinkRender?: () => void,
     readonly onExit?:       () => void,
     readonly autoLink?:     () => string,
+    readonly ignoreDebug?:  boolean,
 }
 
 type passages = {
@@ -172,7 +174,7 @@ let validatePassages = () => {
             if (debug)
                 alert(`${alertMsg}
                        
-To silence this message, set "debug = false" in configuration.js`)
+To silence this message, set "debug = false" in configuration.js or add ignoreDebug to the link / passage referenced`);
             else 
                 console.warn(alertMsg);
         }
@@ -185,7 +187,9 @@ To silence this message, set "debug = false" in configuration.js`)
               // for each passage...
               let passage = passages[title];
               // and the linkReferences in the passage
-              let linkReferences = passage.links.map(link => link.passageTitle);
+              let linkReferences = passage.links
+                                              .filter(link => !link.ignoreDebug)
+                                              .map(link => link.passageTitle);
               // is each linkReference included in the list of titles?
               linkReferences.forEach(linkReference => 
                   doAlertIf(
@@ -208,7 +212,7 @@ To silence this message, set "debug = false" in configuration.js`)
     // is every title accounted for in the list of all the references?
     titlesNonEmpty.forEach(title => 
         doAlertIf(
-            !allLinksAndIntro.includes(title),
+            !(allLinksAndIntro.includes(title) || passages[title].ignoreDebug),
             `No way to get to passage with title "${title}"`));
 }
 
