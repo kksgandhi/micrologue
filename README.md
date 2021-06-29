@@ -20,14 +20,15 @@ Go to the releases section on the right, download `release.zip` from the latest 
  - You can change `solarized-dark` to `solarized-light` in index.html to change the colorscheme from light to dark.
  - You can change the colors for the various speakers in `speakers.css`
  - There are a couple of customization options in `configuration.js`
- - Some helpful information is printed to the console. [Link to instructions on how to open developer tools.](https://grantwinney.com/how-do-i-view-the-dev-console-in-my-browser/) Once you've opened dev tools, go to the tab that says "console"
 
 To actually write your own text, open `passages.js`. There is some commenting within the file that should hopefully help you along. The first two passages are examples of the simple features, after that the passages show off some of the advanced features.
 
 Advanced Guide
 --------------
 
-Rather than using the zipped release, I suggest cloning this repository and using a typescript compiler to compile the js files. Typescript will tell you if your passage is in the wrong format.
+ - Rather than using the zipped release, I suggest cloning this repository and using a typescript compiler to compile the js files. Typescript will tell you if your passage is in the wrong format.
+ - You can use the js hooks and a state variable to modify your game based on whether the player has visited certain passages etc.
+ - Remember that the browser console exists. At the moment it's not heavily utilized, but you can certainly use it to print developer only stuff. [Link to instructions on how to open developer tools.](https://grantwinney.com/how-do-i-view-the-dev-console-in-my-browser/) Once you've opened dev tools, go to the tab that says "console"
 
 Features
 --------
@@ -49,7 +50,6 @@ The "speaker name" parameter in passages sets the class of the `<p>`, so you can
 TODO
 ----
 
- - Warn on broken links
  - Find a way to export to a single minified file
  - Add light / dark mode switch
  - Allow player to choose text speed
