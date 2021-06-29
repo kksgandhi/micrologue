@@ -5,3 +5,7 @@
 .green_speaker {
   color: #859900;
 }
+
+p, a {
+  font-size: 24;
+}
