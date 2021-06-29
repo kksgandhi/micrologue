@@ -194,7 +194,13 @@ To silence this message, set "debug = false" in configuration.js`)
     // make a mega list of all link references
     let allLinkReferences = Object
                                 .values(passages)
-                                .map(passage => passage.links.map(link => link.passageTitle))
+                                .map(passage => {
+                                    let simpleLinks = passage.links.map(link => link.passageTitle);
+                                    if (simpleLinks.length === 0 && 'autoLink' in passage)
+                                        return passage.autoLink!();
+                                    else
+                                        return simpleLinks;
+                                })
                                 // This is a list of lists, so let's flatten it
                                 .flat();
     let allLinksAndIntro = allLinkReferences.concat([startingPassageTitle]);
