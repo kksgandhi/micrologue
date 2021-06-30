@@ -7,4 +7,5 @@ default:
 release:
 	tsc -p .
 	cp *.js *.css *.html release/
+	cp -r imgs/ release/
 	zip -r release.zip release/
