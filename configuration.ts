@@ -8,14 +8,14 @@ let debug = true;
 // TYPEWRITER EFFECT
 // Enable typewriter effect
 let doTypewriterEffect = true;
-// Time between letters for a speaker, assuming you are using typewriter effect (milliseconds)
-let timeBetweenLetters = 30;
-// Time between speakers, assuming you are using typewriter effect (milliseconds)
-let timeBetweenSpeakers = 300;
-// How much extra delay should a comma have?
-let commaDelay = 150;
-// How much extra delay should a period and other punction (example !?:) have?
-let periodDelay = 300;
+// The number of milliseconds waited between typing out individual letters (assuming you are using typewriter effect)
+let baseDelay = 30;
+// Multiply this by baseDelay to get the number of milliseconds waited between speakers
+let delayBetweenSpeakers = 10;
+// Multiply this by baseDelay to get the number of milliseconds waited after a comma
+let delayComma = 3;
+// Multiply this by baseDelay to get the number of milliseconds waited after punctuation (.:;!?-)
+let delayPunctuation = 7;
 
 // JS hooks
 // runs on entering any passage
