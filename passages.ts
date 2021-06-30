@@ -79,12 +79,16 @@ let passages: passages = {
         links: [{
             text: "Re-do the second passage",
             passageTitle: "second passage",
+            // onLinkClick is a hook that is run if this specific link is clicked
+            onLinkClick: () => alert("You clicked going back to the second passage"),
         },{
             text: "Back to the beginnning!",
-            passageTitle: "intro"
+            passageTitle: "intro",
+            onLinkClick: () => alert("You clicked going back to the beginning"),
         }, {
             text: "Want more alerts?",
-            passageTitle: "js passage"
+            passageTitle: "js passage",
+            onLinkClick: () => alert("You clicked asking for more alerts"),
         }, {
             text: "This link won't be shown because its lambda evaluates to false",
             passageTitle: "js passage",

@@ -10,6 +10,7 @@ type link = {
     readonly passageTitle:      string
     readonly showLink?:         () => boolean,
     readonly dynamicText?:      () => boolean,
+    readonly onLinkClick?:      () => void,
     readonly dynamicReference?: () => string,
     readonly ignoreDebug?:      boolean,
 }
@@ -66,6 +67,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
                     if (linkElem.getAttribute("class") === "clicked") return false;
                     if (linkElem.getAttribute("class") === "old-link") return false;
                     else {
+                        link.onLinkClick?.();
                         // set this link as clicked
                         linkElem.setAttribute("class", "clicked");
                         // either remove all the other unclicked links, or mark them as an old links
