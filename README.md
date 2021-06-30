@@ -54,3 +54,4 @@ TODO
  - Add light / dark mode switch
  - Allow player to choose text speed
  - Image support
+ - Make graph exporter

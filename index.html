@@ -3,7 +3,7 @@
       <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
       <meta content="utf-8" http-equiv="encoding">
       <title>Micrologue</title>
-      <link rel="stylesheet" href="solarized-dark.css">
+      <link rel="stylesheet" href="solarized-dark.css" id="colorSchemeCSS">
       <link rel="stylesheet" href="speakers.css">
       <link rel="stylesheet" href="animations.css">
    </head>
@@ -13,8 +13,9 @@
 	  </div>
       <br><br><br><br><br><br><br><br><br>
       <hr>
-      <p style="display:inline;">Text Speed:&nbsp;&nbsp;</p>
+      <p style="display:inline;color:#93a1a1;">Text Speed:&nbsp;&nbsp;</p>
       <input type="range" min="0" max="1000" value="500" class="slider" id="textSpeedSlider">
+      <img title="Change color scheme" src="imgs/sun-warm.png" width="40" height="40" id="colorSchemeChanger"></img>
       <script type = "text/JavaScript" src="configuration.js"> </script>
       <script type = "text/JavaScript" src="passages.js"> </script>
       <script type = "text/JavaScript" src="main.js"> </script>

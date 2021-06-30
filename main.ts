@@ -230,3 +230,13 @@ textSpeedSlider.oninput = () => {
     delay = baseDelay * (x ** 2) / 250000;
     console.log(`New text delay ${delay}`);
 }
+
+let colorSchemeChanger = document.getElementById("colorSchemeChanger")!;
+colorSchemeChanger.onclick = () => {
+    let cssElement = document.getElementById("colorSchemeCSS")!;
+    let curTheme = cssElement.getAttribute("href")!;
+    let newTheme = curTheme === "solarized-dark.css" ? "solarized-light.css" : "solarized-dark.css";
+    let newImg = curTheme === "solarized-dark.css" ? "imgs/moon-black.png" : "imgs/sun-warm.png";
+    cssElement.setAttribute("href", newTheme);
+    colorSchemeChanger.setAttribute("src", newImg);
+}
