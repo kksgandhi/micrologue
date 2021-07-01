@@ -6,18 +6,3 @@
   color: #859900;
 }
 
-/* Ignore all this below */
-
-p, a {
-  font-size: 24;
-}
-
-a {
-    cursor: pointer;
-}
-
-#colorSchemeChanger {
-    display: inline;
-    float:   right;
-    cursor:  pointer;
-}

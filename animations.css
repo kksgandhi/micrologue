@@ -22,3 +22,17 @@ p {
 		opacity: 1;
 	}
 }
+
+p, a {
+  font-size: 24;
+}
+
+a {
+    cursor: pointer;
+}
+
+#colorSchemeChanger {
+    display: inline;
+    float:   right;
+    cursor:  pointer;
+}
