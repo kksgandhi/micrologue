@@ -232,11 +232,16 @@ textSpeedSlider.oninput = () => {
 }
 
 let colorSchemeChanger = document.getElementById("colorSchemeChanger")!;
-colorSchemeChanger.onclick = () => {
+let swapColorScheme = () => {
     let cssElement = document.getElementById("colorSchemeCSS")!;
+    // what is the current theme, aka what css file is the main css pointing at?
     let curTheme = cssElement.getAttribute("href")!;
+    // depending, decide on the new color changer icon and the new main css file
     let newTheme = curTheme === "solarized-dark.css" ? "solarized-light.css" : "solarized-dark.css";
     let newImg = curTheme === "solarized-dark.css" ? "imgs/moon-black.png" : "imgs/sun-warm.png";
+    // Actually set the values
     cssElement.setAttribute("href", newTheme);
     colorSchemeChanger.setAttribute("src", newImg);
 }
+colorSchemeChanger.onclick = swapColorScheme;
+if (defaultColorScheme === "light") swapColorScheme();

@@ -4,6 +4,8 @@ let startingPassageTitle = "intro";
 let clearOldLinks = true;
 // leave it as true when working on the project, set it to false when publishing the project.
 let debug = true;
+// change to "light" to start with a light colorscheme
+let defaultColorScheme = "dark";
 
 // TYPEWRITER EFFECT
 // Enable typewriter effect
