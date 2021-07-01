@@ -245,3 +245,5 @@ let swapColorScheme = () => {
 }
 colorSchemeChanger.onclick = swapColorScheme;
 if (defaultColorScheme === "light") swapColorScheme();
+
+document.title = title;

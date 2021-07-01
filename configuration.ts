@@ -1,11 +1,13 @@
+// Title of your game
+let title = "Micrologue";
 // What passage should the game start on?
 let startingPassageTitle = "intro";
-// Should unclicked links be cleared away?
-let clearOldLinks = true;
-// leave it as true when working on the project, set it to false when publishing the project.
-let debug = true;
 // change to "light" to start with a light colorscheme
 let defaultColorScheme = "dark";
+// Should the game yell at you when you have passages that don't lead anywhere? Set this to false and warning messages will go to the console instead.
+let debug = true;
+// Should unclicked links be cleared away?
+let clearOldLinks = true;
 
 // TYPEWRITER EFFECT
 // Enable typewriter effect

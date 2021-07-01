@@ -16,8 +16,8 @@ Instructions for those who just want to check out the project, or don't have muc
 
 Go to the releases section on the right, download `release.zip` from the latest release, unzip it, and open `index.html` to see the demo game.
 
+ - Check out `configuration.js` for a variety of game settings and simple tweaks.
  - You can change the colors for the various speakers in `speakers.css`
- - There are a couple of customization options in `configuration.js`
 
 To actually write your own text, open `passages.js`. There is some commenting within the file that should hopefully help you along. The first two passages are examples of the simple features, after that the passages show off some of the advanced features.
 
@@ -49,7 +49,5 @@ TODO
 ----
 
  - Find a way to export to a single minified file
- - Add light / dark mode switch
- - Allow player to choose text speed
- - Image support
  - Make graph exporter
+ - Image support
