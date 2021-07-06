@@ -50,4 +50,3 @@ TODO
 ----
 
  - Make graph exporter
- - Image support

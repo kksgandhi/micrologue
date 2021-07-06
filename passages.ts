@@ -48,11 +48,8 @@ let passages: passages = {
             text: "See the power of javascript",
             passageTitle: "js passage"
         }, {
-            text: "See the power of autolinks",
-            passageTitle: "autolink passage"
-        }, {
-            text: "See dynamic text",
-            passageTitle: "dynamic text"
+            text: "See other features",
+            passageTitle: "other features"
         }]
     },
     // Here is an empty passage for all your copy pasting needs
@@ -101,10 +98,26 @@ let passages: passages = {
         onExit:       () => alert("You are exiting the passage"),
         onLinkRender: () => alert("The links are rendering"),
     },
-    "autolink passage": {
+    "other features": {
         utterances: [{
             speaker: "primo",
-            text: "This passage will return to the second passage without any user interaction."
+            text: "This text has no typewriter effect", noTypewriter: true,
+        }, {
+            speaker: "primo",
+            text: "This text will be ignored because dynamicText takes precedence",
+            // The output of the dynamicText function will be displayed, and 'text' will be ignored
+            // Template literals make this easier
+            // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#description
+            dynamicText: () => "Here is some dynamic text: The current date is " + new Date(),
+        }, {
+            speaker: "primo",
+            text: "Here is an image. All I had to do was put an img html tag as the speaker text",
+        }, {
+            speaker: "primo",
+            text: "<img src=\"imgs/sun-warm.png\"></img><hr>", noTypewriter: true
+        }, {
+            speaker: "green_speaker",
+            text: "This passage has an autolink, and will return to the second passage without any user interaction"
         }],
         // leave the links array empty. If it is not empty, the links will be rendered and the autolink will be ignored
         links: [],
@@ -112,19 +125,4 @@ let passages: passages = {
         // If you don't know js and are unsure what the () => is about, don't worry about it, you can just copy it for future autolinks
         autoLink: () => "second passage",
     },
-    "dynamic text": {
-        utterances: [{
-            speaker: "primo",
-            text: "This text will be ignored because dynamicText takes precedence",
-            // The output of the dynamicText function will be displayed, and 'text' will be ignored
-            dynamicText: () => "The current date is: " + new Date(),
-        }, {
-            speaker: "green_speaker",
-            text: "Returning to second passage"
-        }],
-        // dynamicText can also be used in links. I don't have an example, but it's pretty much the same thing.
-        // Furthermore, if you want a link to point somewhere different, you can use dynamicReference
-        links: [],
-        autoLink: () => "second passage"
-    }
 }

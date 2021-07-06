@@ -3,6 +3,7 @@ type utterance = {
     readonly text:           string
     readonly showUtterance?: () => boolean,
     readonly dynamicText?:   () => string,
+    readonly noTypewriter?:  boolean,
 }
 
 type link = {
@@ -133,20 +134,26 @@ let renderPassageTypewriter = async (passage: passage) => {
             main.appendChild(utteranceElem);
             // Use the dynamic text if it exists, else use the normal text
             let characters = utterance.dynamicText?.() || utterance.text;
-            // for every character index...
-            for (let charidx = 0; charidx < characters.length; charidx++) {
-                // convert the innerHTML into the substring upto that index
-                utteranceElem.innerHTML = characters.slice(0, charidx + 1);
-                let character = characters[charidx];
-                // if the character was a comma wait a bit
-                if (character === ",") 
-                    await sleep(delayComma * delay);
-                // if the character was other punctuation, wait a bit longer
-                if (".:;!?-".split('').includes(character))
-                    await sleep(delayPunctuation * delay);
-                // wait between characters
-                await sleep(delay);
+            // if noTypewriter, just set it and move on.
+            if (utterance.noTypewriter) {
+                utteranceElem.innerHTML = characters;
+                utteranceElem.setAttribute("class", `${utterance.speaker} no-typewriter`);
             }
+            else
+                // for every character index...
+                for (let charidx = 0; charidx < characters.length; charidx++) {
+                    // convert the innerHTML into the substring upto that index
+                    utteranceElem.innerHTML = characters.slice(0, charidx + 1);
+                    let character = characters[charidx];
+                    // if the character was a comma wait a bit
+                    if (character === ",") 
+                        await sleep(delayComma * delay);
+                    // if the character was other punctuation, wait a bit longer
+                    if (".:;!?-".split('').includes(character))
+                        await sleep(delayPunctuation * delay);
+                    // wait between characters
+                    await sleep(delay);
+                }
             // wait between speakers
             await sleep(delay * delayBetweenSpeakers);
             scrollToBottom();
