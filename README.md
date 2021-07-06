@@ -24,6 +24,7 @@ To actually write your own text, open `passages.js`. There is some commenting wi
 Advanced Guide
 --------------
 
+ - I suggest zettelkasten programs like [Obsidian](https://obsidian.md/) for prototyping and viewing projects like this.
  - Rather than using the zipped release, I suggest cloning this repository and using a typescript compiler to compile the js files. Typescript will tell you if your passage is in the wrong format.
  - You can use the js hooks and a state variable to modify your game based on whether the player has visited certain passages etc.
  - Remember that the browser console exists. At the moment it's not heavily utilized, but you can certainly use it to print developer only stuff. [Link to instructions on how to open developer tools.](https://grantwinney.com/how-do-i-view-the-dev-console-in-my-browser/) Once you've opened dev tools, go to the tab that says "console"
