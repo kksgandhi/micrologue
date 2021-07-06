@@ -224,10 +224,9 @@ validatePassages();
 
 let textSpeedSlider = (document.getElementById("textSpeedSlider")! as HTMLInputElement);
 textSpeedSlider.oninput = () => {
-    // 1000 minus the value, that way higher values are faster
-    let x = (1000 - parseInt(textSpeedSlider.value));
-    // Make the slider non-linear, to allow players to really slow it down
-    delay = baseDelay * (x ** 2) / 250000;
+    // Make the slider a logistic curve
+    let x = parseInt(textSpeedSlider.value);
+    delay = 2 * baseDelay / (1 + Math.E ** (-0.005 * (500 - x)));
     console.log(`New text delay ${delay}`);
 }
 
