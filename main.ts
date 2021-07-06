@@ -109,7 +109,7 @@ let renderPassageSimple = (passage: passage) => {
         // render the utterance only if the utterance has no "showUtterance" hook or if the showUtterance hook passes
         if (!('showUtterance' in utterance) || utterance.showUtterance!()) {
             let utteranceElem = document.createElement("p");
-            utteranceElem.setAttribute("class", utterance.speaker);
+            utteranceElem.setAttribute("class", `${utterance.speaker} no-typewriter`);
             // Use the dynamic text if it exists, else use the normal text
             utteranceElem.innerHTML = utterance.dynamicText?.() || utterance.text;
             main.appendChild(utteranceElem);

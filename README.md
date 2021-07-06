@@ -49,6 +49,5 @@ The "speaker name" parameter in passages sets the class of the `<p>`, so you can
 TODO
 ----
 
- - Find a way to export to a single minified file
  - Make graph exporter
  - Image support

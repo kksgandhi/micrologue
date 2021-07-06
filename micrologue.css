@@ -6,7 +6,7 @@
 	animation-duration: 0.5s;
 }
 
-p {
+.no-typewriter {
 	opacity: 1;
 	animation-name: fadeInOpacity;
 	animation-iteration-count: 1;
