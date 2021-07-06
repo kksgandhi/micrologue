@@ -110,7 +110,7 @@ let renderPassageSimple = (passage: passage) => {
         // render the utterance only if the utterance has no "showUtterance" hook or if the showUtterance hook passes
         if (!('showUtterance' in utterance) || utterance.showUtterance!()) {
             let utteranceElem = document.createElement("p");
-            utteranceElem.setAttribute("class", `${utterance.speaker} no-typewriter`);
+            utteranceElem.setAttribute("class", `${utterance.speaker} fade-in`);
             // Use the dynamic text if it exists, else use the normal text
             utteranceElem.innerHTML = utterance.dynamicText?.() || utterance.text;
             main.appendChild(utteranceElem);
@@ -137,7 +137,7 @@ let renderPassageTypewriter = async (passage: passage) => {
             // if noTypewriter, just set it and move on.
             if (utterance.noTypewriter) {
                 utteranceElem.innerHTML = characters;
-                utteranceElem.setAttribute("class", `${utterance.speaker} no-typewriter`);
+                utteranceElem.setAttribute("class", `${utterance.speaker} fade-in`);
             }
             else
                 // for every character index...
