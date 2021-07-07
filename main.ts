@@ -1,9 +1,10 @@
 type utterance = {
-    readonly speaker:        string,
-    readonly text:           string
-    readonly showUtterance?: () => boolean,
-    readonly dynamicText?:   () => string,
-    readonly noTypewriter?:  boolean,
+    readonly speaker:          string,
+    readonly text:             string
+    readonly showUtterance?:   () => boolean,
+    readonly dynamicText?:     () => string,
+    readonly noTypewriter?:    boolean,
+    readonly additionalDelay?: () => number,
 }
 
 type link = {
@@ -102,11 +103,13 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
     onAnyLinkRender(passage);
 }
 
+let sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 // rendering the passage without a typewriter effect
-let renderPassageSimple = (passage: passage) => {
+let renderPassageSimple = async (passage: passage) => {
     let main = document.getElementById("main")!;
     // simple append of all the passages
-    passage.utterances.forEach(utterance => {
+    for (let idx in passage.utterances) {
+        let utterance = passage.utterances[idx];
         // render the utterance only if the utterance has no "showUtterance" hook or if the showUtterance hook passes
         if (!('showUtterance' in utterance) || utterance.showUtterance!()) {
             let utteranceElem = document.createElement("p");
@@ -114,12 +117,16 @@ let renderPassageSimple = (passage: passage) => {
             // Use the dynamic text if it exists, else use the normal text
             utteranceElem.innerHTML = utterance.dynamicText?.() || utterance.text;
             main.appendChild(utteranceElem);
+            // if the passage has additionalDelay, delay that much as well
+            if ('additionalDelay' in utterance) {
+                console.log("ADDITIONAL DELAY NO TYPEWRITER");
+                await sleep(utterance.additionalDelay!());
+            }
         }
-    });
+    }
     renderLinksGeneric(main, passage);
 }
 
-let sleep = (ms: number) => new Promise(resolve => setTimeout(resolve, ms));
 // render passage with a typewriter effect.
 let renderPassageTypewriter = async (passage: passage) => {
     let main = document.getElementById("main")!;
@@ -156,6 +163,9 @@ let renderPassageTypewriter = async (passage: passage) => {
                 }
             // wait between speakers
             await sleep(delay * delayBetweenSpeakers);
+            // if the passage has additionalDelay, delay that much as well
+            if ('additionalDelay' in utterance)
+                await sleep(utterance.additionalDelay!());
             scrollToBottom();
         }
     }

@@ -101,7 +101,7 @@ let passages: passages = {
     "other features": {
         utterances: [{
             speaker: "primo",
-            text: "This text has no typewriter effect", noTypewriter: true,
+            text: "This text has no typewriter effect.<br><br>Linebreak with br <br><br> In addition, it has 'additionalDelay', which means there will be a longer wait after it is done rendering.", noTypewriter: true, additionalDelay: () => 2000,
         }, {
             speaker: "primo",
             text: "This text will be ignored because dynamicText takes precedence",

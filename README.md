@@ -90,6 +90,8 @@ Furthermore, it optionally holds the following variables:
    - the text returned by this function will be rendered. **Overrides text**
  - noTypewriter (`boolean`)
    - if true, this utterance will be rendered without typewriter effect. If false, utterance will be rendered normally. To disable typewriter effect for all utterances, set `doTypewriterEffect` in `configuration.ts / configuration.js`
+ - additionalDelay (`() => number`)
+   - Delay an additional amount after this passage is rendered. The variable `delay` contains the user chosen text speed.
 
 ### link
 
