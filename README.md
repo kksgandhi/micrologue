@@ -9,8 +9,8 @@ If you don't have any coding experience, this should still be easy to use.
 
 If you have a lot of coding expertise, the fact that this is written in raw javascript means that it should be flexible and extensible, though depending on your need [Twine](https://twinery.org/) might still be better.
 
-Beginner's Guide
-----------------
+Beginner's Guide & Engine Demo
+------------------------------
 
 Instructions for those who just want to check out the project, or don't have much coding skill.
 
@@ -41,8 +41,6 @@ Features
  - js hooks to allow passages to be hidden or shown depending on state
  - Autolinks, allowing you to jump from passage to passage without user interaction
  - This is a small, open source project, so it can be modified to fit any use case.
-
-The "speaker name" parameter in passages sets the class of the `<p>` tags, so you can apply whatever css you want to it.
 
 Documentation
 =============
@@ -86,9 +84,9 @@ utterance is an object type that necessarily holds the following variables:
 
 Furthermore, it optionally holds the following variables:
 
- - showUtterance (``() => boolean`)
+ - showUtterance (`() => boolean`)
    - function, if true this will show utterance, if false the utterance will not be rendered.
- - dynamicText (``() => string`)
+ - dynamicText (`() => string`)
    - the text returned by this function will be rendered. **Overrides text**
  - noTypewriter (`boolean`)
    - if true, this utterance will be rendered without typewriter effect. If false, utterance will be rendered normally. To disable typewriter effect for all utterances, set `doTypewriterEffect` in `configuration.ts / configuration.js`
@@ -104,13 +102,13 @@ link is an object type that necessarily holds the following variables:
 
 Furthermore, it optionally holds the following variables:
 
- - showLink (``() => boolean`)
+ - showLink (`() => boolean`)
    - function, if true the link will be rendered, if false then it will not be rendered.
- - dynamicText (``() => boolean`)
+ - dynamicText (`() => boolean`)
    - the text returned by this function will be rendered. **Overrides text**
- - onLinkClick (``() => void`)
+ - onLinkClick (`() => void`)
    - function run on link click
- - dynamicReference (``() => string`)
+ - dynamicReference (`() => string`)
    - the passage title returned by this function will be rendered. **Overrides `passageTitle`**
  - ignoreDebug (`boolean`)
    - if true, debugging warnings will be disabled for this link.
