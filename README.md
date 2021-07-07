@@ -18,15 +18,15 @@ Go to the releases section on the right, download `release.zip` from the latest 
 
  - Check out `configuration.js` for a variety of game settings and simple tweaks.
  - You can change the colors for the various speakers in `speakers.css`
-
-To actually write your own text, open `passages.js`. There is some commenting within the file that should hopefully help you along. The first two passages are examples of the simple features, after that the passages show off some of the advanced features.
+ - To actually write your own text, open `passages.js`. There is some commenting within the file that should hopefully help you along. The first two passages are examples of the simple features, after that the passages show off some of the advanced features.
 
 Advanced Guide
 --------------
 
- - I suggest zettelkasten programs like [Obsidian](https://obsidian.md/) for prototyping and viewing projects like this.
  - Rather than using the zipped release, I suggest cloning this repository and using a typescript compiler to compile the js files. Typescript will tell you if your passage is in the wrong format.
- - You can use the js hooks and a state variable to modify your game based on whether the player has visited certain passages etc.
+ - I suggest zettelkasten programs like [Obsidian](https://obsidian.md/) for prototyping and viewing projects like this.
+ - You can use the js hooks and state variables to modify your game based on whether the player has visited certain passages etc.
+   - For example, in `passages.ts` you can add a variable called `hasPlayerVisitedPassageX`, and then in passage X you can create an `onEnter` hook like `onEnter: () => hasPlayerVisitedPassageX = true` to keep track.
  - Remember that the browser console exists. At the moment it's not heavily utilized, but you can certainly use it to print developer only stuff. [Link to instructions on how to open developer tools.](https://grantwinney.com/how-do-i-view-the-dev-console-in-my-browser/) Once you've opened dev tools, go to the tab that says "console"
 
 Features
@@ -42,11 +42,81 @@ Features
  - Autolinks, allowing you to jump from passage to passage without user interaction
  - This is a small, open source project, so it can be modified to fit any use case.
 
-To actually understand how to use these features, open `passages.js` and read the comments therein.
+The "speaker name" parameter in passages sets the class of the `<p>` tags, so you can apply whatever css you want to it.
 
-The "speaker name" parameter in passages sets the class of the `<p>`, so you can apply whatever css you want to it.
+Documentation
+=============
+
+This formal documentation exists as a reference, but for beginners to micrologue, it would be better to read the comments in `passages.js` for examples of the features and how to use them.
+
+### passages
+
+`passages` is an object mapping passage titles to `passage` objects. This object contains the entirety of the story text and most of the story code.
+
+### passage
+
+passage is an object type that necessarily holds the following variables:
+
+ - utterances (`utterance[]`)
+   - list of utterance objects that are rendered in order when the passage is rendered.
+ - links (`link[]`)
+   - list of link objects that are rendered in order when the passage is rendered (after utterances are rendered.)
+
+Furthermore, it optionally holds the following variables:
+
+ - onEnter (`() => void`)
+   - function called upon entering the passage
+ - onLinkRender (`() => void`)
+   - function called when links are rendered
+ - onExit (`() => void`)
+   - function called when passage is exited
+ - autoLink (`() => string`)
+   - After all utterances are rendered, the passage returned by autolink will be rendered without any player input.
+ - ignoreDebug (`boolean`)
+   - if true, debugging warnings will be disabled for this passage.
+
+### utterance
+
+utterance is an object type that necessarily holds the following variables:
+
+ - speaker (`string`)
+   - Name of the speaker. When this utterance is rendered, the `<p>` tag's class will be the speaker name, allowing custom css to be applied on a speaker by speaker basis.
+ - text (`string`)
+   - The text of the utterance
+
+Furthermore, it optionally holds the following variables:
+
+ - showUtterance (``() => boolean`)
+   - function, if true this will show utterance, if false the utterance will not be rendered.
+ - dynamicText (``() => string`)
+   - the text returned by this function will be rendered. **Overrides text**
+ - noTypewriter (`boolean`)
+   - if true, this utterance will be rendered without typewriter effect. If false, utterance will be rendered normally. To disable typewriter effect for all utterances, set `doTypewriterEffect` in `configuration.ts / configuration.js`
+
+### link
+
+link is an object type that necessarily holds the following variables:
+
+ - text (`string`)
+   - The text of the link
+ - passageTitle (`string`)
+   - Upon clicking this link, the passage with title `passageTitle` will be rendered.
+
+Furthermore, it optionally holds the following variables:
+
+ - showLink (``() => boolean`)
+   - function, if true the link will be rendered, if false then it will not be rendered.
+ - dynamicText (``() => boolean`)
+   - the text returned by this function will be rendered. **Overrides text**
+ - onLinkClick (``() => void`)
+   - function run on link click
+ - dynamicReference (``() => string`)
+   - the passage title returned by this function will be rendered. **Overrides `passageTitle`**
+ - ignoreDebug (`boolean`)
+   - if true, debugging warnings will be disabled for this link.
 
 TODO
 ----
 
  - Make graph exporter
+ - Add formal documentation
