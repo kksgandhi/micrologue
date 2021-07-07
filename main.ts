@@ -49,16 +49,16 @@ let scrollToBottom = () => window.scrollTo({ top: document.body.scrollHeight, be
 
 // whether you are using typewriter passage rendering or not, the links are rendered in the same way through this function.
 let renderLinksGeneric = (main: Element, passage: passage) => {
-    // No links in the passage? Check for an autolink
-    if (passage.links.length === 0) {
+    // Check for an autolink
+    let autoLinkTarget = passage.autoLink?.();
+    if (autoLinkTarget) {
         passage.onExit?.();
         onAnyExit(passage);
-        // and go there if an autolink is found
-        if ('autoLink' in passage) renderPassageGeneric(getPassage(passage.autoLink!()));
-        else console.warn("Links were empty and there was no autolink. Is this the end of your story or did you mess up somewhere?");
+        // if it exists, go there
+        renderPassageGeneric(getPassage(autoLinkTarget));
     }
     else {
-        // Oh there are links? Let's insert them
+        // Autolink didn't exist or returned an empty string, let's render the links
         passage.links.forEach(link => {
             // render the link only if the link has no "showLink" hook or if the showLink hook passes
             if (!('showLink' in link) || link.showLink!()) {

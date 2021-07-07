@@ -60,7 +60,7 @@ passage is an object type that necessarily holds the following variables:
  - utterances (`utterance[]`)
    - list of utterance objects that are rendered in order when the passage is rendered.
  - links (`link[]`)
-   - list of link objects that are rendered in order when the passage is rendered (after utterances are rendered.)
+   - list of link objects that are rendered in order after utterances are rendered. Ignored if `autoLink` returns a non-empty string.
 
 Furthermore, it optionally holds the following variables:
 
@@ -71,7 +71,7 @@ Furthermore, it optionally holds the following variables:
  - onExit (`() => void`)
    - function called when passage is exited
  - autoLink (`() => string`)
-   - After all utterances are rendered, the passage returned by autolink will be rendered without any player input.
+   - After all utterances are rendered, the passage returned by autolink will be rendered without any player input. No links will be rendered *unless autoLink returns an empty string, in which case links will be rendered like normal*
  - ignoreDebug (`boolean`)
    - if true, debugging warnings will be disabled for this passage.
 
@@ -119,4 +119,3 @@ TODO
 ----
 
  - Make graph exporter
- - Add formal documentation

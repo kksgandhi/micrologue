@@ -119,8 +119,8 @@ let passages: passages = {
             speaker: "green_speaker",
             text: "This passage has an autolink, and will return to the second passage without any user interaction"
         }],
-        // leave the links array empty. If it is not empty, the links will be rendered and the autolink will be ignored
-        links: [],
+        // If the autoLink function returns a non-empty string, the links array will be ignored
+        links: [{ text: "This link will be ignored due to the autolink", passageTitle: "second passage"}],
         // and add a parameter called autoLink with the passage name of whatever passage you want to automatically go to
         // If you don't know js and are unsure what the () => is about, don't worry about it, you can just copy it for future autolinks
         autoLink: () => "second passage",
