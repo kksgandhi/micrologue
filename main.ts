@@ -64,7 +64,7 @@ let renderLinksGeneric = (main: Element, passage: passage) => {
             // render the link only if the link has no "showLink" hook or if the showLink hook passes
             if (!('showLink' in link) || link.showLink!()) {
                 let linkElem = document.createElement("a");
-                linkElem.innerHTML = link.text;
+                linkElem.innerHTML = link.dynamicText?.() || link.text;
                 // Set the onclick property to render the next passage
                 linkElem.onclick = () => {
                     // don't do anything if the link has been clicked in the past (or if the link was unclicked, but part of a group of links where another one was clicked)
