@@ -39,9 +39,6 @@ let passages: passages = {
             text: "Re-do the second passage",
             passageTitle: "second passage",
         },{
-            text: "Back to the beginnning!",
-            passageTitle: "intro"
-        }, {
             text: "This also goes to the second passage, but the wording of the link is different",
             passageTitle: "second passage"
         }, {
@@ -50,6 +47,10 @@ let passages: passages = {
         }, {
             text: "See other features",
             passageTitle: "other features"
+        }, {
+            text: "Just have some fun",
+            passageTitle: "fun",
+            onLinkClick: () => resetFun(),
         }]
     },
     // Here is an empty passage for all your copy pasting needs
@@ -125,4 +126,52 @@ let passages: passages = {
         // If you don't know js and are unsure what the () => is about, don't worry about it, you can just copy it for future autolinks
         autoLink: () => "second passage",
     },
+}
+
+// Everything below this line is all just for fun. The code is horrible and undocumented. If anyone complains I can update it
+
+let originalSynonyms = new Set(["friend", "pal", "hombre", "guy", "associate", "chum", "crony", "comrade", "confidant", "peer", "mate", "co-worker", "companion", "amigo", "brother", "homeboy", "accomplice", "ally", "collaborator"]);
+
+let synonyms = new Set(originalSynonyms);
+// a hack to deal with even or odd sized sets
+let notEnoughSynonymsLeft = () => (originalSynonyms.size % 2 == 0 && synonyms.size < 2) || synonyms.size < 1;
+
+let firstS  = "";
+let secondS = "buddy";
+
+
+function getRandomItem(set: Set<string>) {
+    let items = Array.from(set);
+    return items[Math.floor(Math.random() * items.length)];
+}
+
+let resetFun = () => {
+    synonyms = new Set(originalSynonyms);
+    firstS = "";
+    secondS = "buddy";
+};
+
+passages["fun"] = {
+    onEnter: () => {
+        firstS = secondS;
+        secondS = getRandomItem(synonyms);
+        synonyms.delete(secondS);
+    },
+    utterances: [{speaker: "primo", text: "", dynamicText: () => `I'm not your ${firstS}, ${secondS}`}, 
+                {speaker: "primo", text: "And now there aren't enough left, so let's go back to the second passage", showUtterance: notEnoughSynonymsLeft}
+    ],
+    links: Array.from(synonyms).map(synonym => {
+        let retLink: link = {
+            text: "",
+            passageTitle: "fun",
+            dynamicText: () => `I'm not your ${secondS}, ${synonym}`,
+            showLink: () => synonyms.has(synonym),
+            onLinkClick: () => {
+                firstS = secondS;
+                secondS = synonym;
+                synonyms.delete(synonym);
+            }
+        }
+        return retLink;
+    }), autoLink: () => notEnoughSynonymsLeft() ? "second passage" : "",
 }
