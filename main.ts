@@ -11,7 +11,7 @@ type link = {
     readonly text:              string,
     readonly passageTitle:      string
     readonly showLink?:         () => boolean,
-    readonly dynamicText?:      () => boolean,
+    readonly dynamicText?:      () => string,
     readonly onLinkClick?:      () => void,
     readonly dynamicReference?: () => string,
     readonly ignoreDebug?:      boolean,
