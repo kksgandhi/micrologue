@@ -1,13 +1,13 @@
 Micrologue
 ==========
 
-Micrologue is an interactive fiction (text based adventure) engine focused on dialogues between the player and a number of NPCs (Non Player Characters). These dialogues are simple, a number of NPCs say their lines, then the player is given options to respond. After the player chooses a response, the NPCs respond and the cycle starts anew. This method is known as stretch-text.
+Micrologue is an interactive fiction (text based adventure) engine intended to be a (very niche) alternative to [Twine](https://twinery.org/). Micrologue is a "stretch text" engine: rather than going to new pages each time a link is clicked, new text is revealed at the bottom of the story with a nice typewriter like effect.
 
 If your game doesn't fit into this mold, I suggest looking into [Twine](https://twinery.org/). [Here is a megalist of Twine resources.](https://twinelab.net/twine-resources/#/) Remember, micrologue is a standalone engine, not a Twine format. If you are interested in a Twine format that does something similar to micrologue, I suggest checking out [trialogue](https://github.com/phivk/trialogue)
 
-If you don't have any coding experience, this should still be easy to use.
-
-If you have a lot of coding expertise, the fact that this is written in raw javascript means that it should be flexible and extensible, though depending on your need [Twine](https://twinery.org/) might still be better.
+ - For beginners without coding experience, this should be easy to use. There are a variety of advanced features, but these can be ignored in order to create a simple but beautiful games.
+ - For advanced users, there are a variety of "hooks", aka areas to add custom HTML and JavaScript to customize the engine.
+ - For expert users, this is open source and relatively small, the source code can be modified to support any type of game.
 
 Demo Game
 ---------
@@ -40,6 +40,7 @@ Features
  - Branching narrative, ala Twine
    - Passages are read out, then the user chooses which passage to go to next.
  - Stretch text format
+ - Typewriter effect
  - Multiple speakers, each with their own css
  - js hooks to run arbitrary js code on passage entry, on passage render finish, and on passage exit.
    - These hooks can be used to modify state variables
@@ -124,3 +125,5 @@ TODO
 ----
 
  - Make graph exporter
+ - User friendliness
+   - Could a non js based, simple file format work instead of passages.js? There are a lot of benefits to having passages be a js file, the biggest one being that the lambdas can be directly built in... I'm wondering if there are any compromises here...
