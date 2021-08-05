@@ -1,3 +1,5 @@
+// TYPE DEFINITIONS
+
 type utterance = {
     readonly speaker:          string,
     readonly text:             string
@@ -239,16 +241,22 @@ To silence this message, set "debug = false" in configuration.js or add ignoreDe
 
 validatePassages();
 
+// TEXT SPEED SLIDER
+
 let textSpeedSlider = (document.getElementById("textSpeedSlider")! as HTMLInputElement);
 let setDelayToSliderVal = () => {
-    // Make the slider a piecewise, smooth curve
+    // Rather than a linear speed up or down, it'll feel better if it's a curve
+    // https://www.desmos.com/calculator/ntlhlbmqiz
     let sliderVal = parseInt(textSpeedSlider.value);
     let piece1 = (x: number) => ((2 * baseDelay * (x ** 2)) / 250000) - (2 * baseDelay * x / 250) + 3 * baseDelay;
     let piece2 = (x: number) => ((-1 * baseDelay * (x ** 2)) / 250000) + (baseDelay * x / 250);
+    // the curve is piecewise, and switches at 500 (halfway down the slider)
     let pieceOfPiecewiseFunctionToUse = sliderVal < 500 ? piece1 : piece2;
     delay = Math.round(pieceOfPiecewiseFunctionToUse(sliderVal));
 }
 textSpeedSlider.oninput = setDelayToSliderVal;
+
+// COLOR SCHEME CHANGER
 
 let colorSchemeChanger = document.getElementById("colorSchemeChanger")!;
 let swapColorScheme = () => {
@@ -267,5 +275,7 @@ if (defaultColorScheme === "light") swapColorScheme();
 
 document.title = title;
 
+// Hold space to temporarily speed up
+// When space is pressed, it sets delay to 0, when space is lifted, it resets delay
 document.addEventListener('keydown', event => { if (event.key === " ") delay = 0; });
 document.addEventListener('keyup', event => { if (event.key === " ") setDelayToSliderVal(); });
