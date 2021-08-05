@@ -9,16 +9,21 @@ If you don't have any coding experience, this should still be easy to use.
 
 If you have a lot of coding expertise, the fact that this is written in raw javascript means that it should be flexible and extensible, though depending on your need [Twine](https://twinery.org/) might still be better.
 
-Beginner's Guide & Engine Demo
-------------------------------
-
-Instructions for those who just want to check out the project, or don't have much coding skill.
+Demo Game
+---------
 
 Go to the releases section on the right, download `release.zip` from the latest release, unzip it, and open `index.html` to see the demo game.
 
- - Check out `configuration.js` for a variety of game settings and simple tweaks.
- - You can change the colors for the various speakers in `speakers.css`
- - To actually write your own text, open `passages.js`. There is some commenting within the file that should hopefully help you along. The first two passages are examples of the simple features, after that the passages show off some of the advanced features.
+Guide for Beginners
+-------------------
+
+Instructions for those who want to use micrologue to make their own game, but don't have much coding skill.
+
+Download `release.zip` and unzip it. To make your own game, you should edit `configuration.js`, `speakers.css`, and `passages.js`. When you've made the edits you want, open `index.html` to see your game in action.
+
+ - `configuration.js` has a variety of game settings and simple tweaks.
+ - `speakers.css` allows you to change the colors for the various speakers.
+ - `passages.js` lets you write the actual passages that go into your game. There is some commenting within the file that should hopefully help you along. The first two passages are examples of the simple features, after that the passages show off some of the advanced features.
 
 Advanced Guide
 --------------
