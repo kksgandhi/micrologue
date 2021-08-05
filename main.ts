@@ -240,12 +240,13 @@ To silence this message, set "debug = false" in configuration.js or add ignoreDe
 validatePassages();
 
 let textSpeedSlider = (document.getElementById("textSpeedSlider")! as HTMLInputElement);
-textSpeedSlider.oninput = () => {
+let setDelayToSliderVal = () => {
     // Make the slider a logistic curve
     let x = parseInt(textSpeedSlider.value);
     delay = 2 * baseDelay / (1 + Math.E ** (-0.005 * (500 - x)));
     console.log(`New text delay ${delay}`);
 }
+textSpeedSlider.oninput = setDelayToSliderVal;
 
 let colorSchemeChanger = document.getElementById("colorSchemeChanger")!;
 let swapColorScheme = () => {
@@ -263,3 +264,6 @@ colorSchemeChanger.onclick = swapColorScheme;
 if (defaultColorScheme === "light") swapColorScheme();
 
 document.title = title;
+
+document.addEventListener('keydown', event => { if (event.key === " ") delay = 0; });
+document.addEventListener('keyup', event => { if (event.key === " ") setDelayToSliderVal(); });
