@@ -125,6 +125,7 @@ let renderPassageSimple = async (passage: passage) => {
                 await sleep(utterance.additionalDelay!());
             }
         }
+        scrollToBottom();
     }
     renderLinksGeneric(main, passage);
 }
@@ -162,6 +163,7 @@ let renderPassageTypewriter = async (passage: passage) => {
                         await sleep(delayPunctuation * delay);
                     // wait between characters
                     await sleep(delay);
+                    scrollToBottom();
                 }
             // wait between speakers
             await sleep(delay * delayBetweenSpeakers);
