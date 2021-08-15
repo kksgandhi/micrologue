@@ -33,3 +33,8 @@ a {
     display:inline;
     color:#93a1a1;
 }
+
+.footer {
+  position: sticky;
+  bottom: 0;
+}
